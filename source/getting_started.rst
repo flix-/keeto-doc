@@ -42,14 +42,14 @@ Keeto
 
 Copy the configuration file keeto.conf from the samples directory into
 the OpenSSH configuration root folder. As the config contains sensitive
-data make sure it is only readable/modifiable by a priviledged user::
+data make sure it is only readable/modifiable by a privileged user::
 
     <root>$ SSH_DIR=/etc/ssh
     <root>$ cp samples/keeto.conf $SSH_DIR
     <root>$ chmod 600 $SSH_DIR/keeto.conf
 
 Furthermore create a directory where the authorized_keys files of the
-users are placed and a directory for trusted ca certificates and crl's::
+users are placed and a directory for trusted CA certificates and CRL's::
 
     <root>$ mkdir $SSH_DIR/authorized_keys
     <root>$ chmod 711 $SSH_DIR/authorized_keys
