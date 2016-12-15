@@ -7,7 +7,7 @@ Prerequisites
 The following packages are needed in order to run Keeto:
 
 * OpenSSH >= 6.2
-* LDAP Server
+* Directory Service
 * Syslog
 * PAM
 * pkg-config >= 0.9.9
@@ -98,6 +98,8 @@ Keeto logs to the syslog facility specified in keeto.conf. Adjust your
 syslog server accordingly. A sample config for syslog-ng can be found
 in the samples directory that logs Keeto output to a local file.
 
-LDAP Server
-^^^^^^^^^^^
+Directory Service
+^^^^^^^^^^^^^^^^^
+
+Lorem ipsum
 

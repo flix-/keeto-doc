@@ -5,10 +5,13 @@ Table of Contents
 =================
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 4
 
    about
+   concept
    getting_started
+   data_model
+   security_considerations
    faq
 
 Indices and tables
