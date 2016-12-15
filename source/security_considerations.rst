@@ -1,5 +1,0 @@
-Security Considerations
-=======================
-
-Lorem Ipsum
-

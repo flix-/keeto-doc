@@ -11,7 +11,6 @@ Table of Contents
    concept
    getting_started
    ldap_data_model
-   security_considerations
    faq
 
 Indices and tables
