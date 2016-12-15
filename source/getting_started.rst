@@ -41,8 +41,10 @@ Keeto
 ^^^^^
 
 Copy the configuration file keeto.conf from the samples directory into
-the OpenSSH configuration root folder. As the config contains sensitive
-data make sure it is only readable/modifiable by a privileged user::
+the OpenSSH configuration root folder and adjust it to your needs. An
+explanation of the various options can be found within the file. As the
+config contains sensitive data make sure it is only readable/modifiable
+by a privileged user::
 
     <root>$ SSH_DIR=/etc/ssh
     <root>$ cp samples/keeto.conf $SSH_DIR
@@ -63,9 +65,6 @@ the LDAP connection also include the necessary certificates here.
 Finally create symlinks with::
 
     <root>$ c_rehash $SSH_DIR/cert_store
-
-Edit the configuration file and adjust it to your needs. An explanation
-of the various options can be obtained from the following table <TODO>.
 
 OpenSSH
 ^^^^^^^
@@ -101,5 +100,10 @@ in the samples directory that logs Keeto output to a local file.
 Directory Service
 ^^^^^^^^^^^^^^^^^
 
-Lorem ipsum
+Keeto consults a Directory Service in order to obtain current access
+permissions and keys. The relevant entities and their relationship
+are described in :ref:`ldap-data-model`. General configuration is software
+dependent and not not outlined here. The samples directory however
+contains relevant configurations for OpenLDAP and LDIF files for setting
+up a testing environment.
 

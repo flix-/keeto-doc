@@ -1,3 +1,5 @@
+.. _ldap-data-model:
+
 LDAP Data Model
 ===============
 
@@ -16,7 +18,7 @@ access permissions and key material. It specifies the relevant access
 profiles that shall be taken into account. Keeto determines the right
 SSH server entry through a unique identifier that is specified in the
 Keeto configuration and must match the identifier in the SSH server
-entry in the Directory Server. ::
+entry in the Directory Service. ::
 
   objectClass: top
   objectClass: keetoSSHServer
@@ -26,7 +28,7 @@ entry in the Directory Server. ::
 +====================+===========+==============+==================================+
 | cn                 | yes       | no           | RDN of SSH server entry.         |
 +--------------------+-----------+--------------+----------------------------------+
-| uid                | yes       | yes          | Unique identifier of SSH server. |
+| uid                | yes       | no           | Unique identifier of SSH server. |
 |                    |           |              |                                  |
 |                    |           |              | See also: <ssh_server_uid>.      |
 +--------------------+-----------+--------------+----------------------------------+
@@ -46,9 +48,12 @@ Direct Access Profile
 ^^^^^^^^^^^^^^^^^^^^^
 
 A direct access profile specifies a reference to a group of key
-providers that shall be able to login with it's own account. Optionally
-keystore options can be specified that are taken into account for all
-key providers. A direct access profile can be enabled / disabled. ::
+providers that shall be able to login with it's own account. Each key
+provider's UID is checked against the UID of the user about to login.
+If they match the X.509 certificates of the key provider will be taken
+into account. Optionally keystore options can be specified that are
+used for all key providers. A direct access profile can be enabled /
+disabled. ::
 
   objectClass: top
   objectClass: keetoAccessProfile
@@ -72,8 +77,9 @@ Access On Behalf Profile
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
 Access on behalf profiles enable authentication on behalf of someone
-else. Target keystores specify a group of accounts that can be used
-by all key providers on behalf. As with direct access profiles keystore
+else. For that the UID of the user about to login is searched in the
+target keystore's. On match all valid keys of all key providers are
+synced into that target keystore. As with direct access profiles keystore
 options can be specified optionally and the profile can be enabled /
 disabled. ::
 
@@ -101,15 +107,14 @@ Key Provider
 ------------
 
 A key provider is an entry that provides the key material through
-X.509 certificate(s). It is identified by its UID. All relevant
-attributes are specified in the Keeto configuration file to adjust it
-to different deployments. Key providers are relevant for both direct
-access profiles and access on behalf profiles.
+X.509 certificate(s). All relevant attributes are specified in the Keeto
+configuration file to adjust it to different deployments. Key providers
+are relevant for both direct access profiles and access on behalf profiles.
 
 +-------------------------------+-----------+--------------+----------------------------+
 | Attribute                     | Mandatory | Single-Value | Description                |
 +===============================+===========+==============+============================+
-| <ldap_key_provider_uid_attr>  | yes       | yes          | UID of key provider.       |
+| <ldap_key_provider_uid_attr>  | yes       | no           | UID of key provider.       |
 +-------------------------------+-----------+--------------+----------------------------+
 | <ldap_key_provider_cert_attr> | yes       | no           | X.509 certificate of user. |
 +-------------------------------+-----------+--------------+----------------------------+
@@ -123,7 +128,7 @@ specifies the accounts that can be used on behalf of the key providers.
 +---------------------------------+-----------+--------------+-------------------------+
 | Attribute                       | Mandatory | Single-Value | Description             |
 +=================================+===========+==============+=========================+
-| <ldap_target_keystore_uid_attr> | yes       | yes          | UID of target keystore. |
+| <ldap_target_keystore_uid_attr> | yes       | no           | UID of target keystore. |
 +---------------------------------+-----------+--------------+-------------------------+
 
 Groups
