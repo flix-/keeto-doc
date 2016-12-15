@@ -5,12 +5,12 @@ Table of Contents
 =================
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 3
 
    about
    concept
    getting_started
-   data_model
+   ldap_data_model
    security_considerations
    faq
 
