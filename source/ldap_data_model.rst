@@ -15,9 +15,9 @@ SSH Server
 
 The SSH server entry is the starting point for the determination of
 access permissions and key material. It specifies the relevant access
-profiles that shall be taken into account. Keeto determines the right
+profiles that shall be taken into account. Keeto locates the right
 SSH server entry through a unique identifier that is specified in the
-Keeto configuration and must match the identifier in the SSH server
+Keeto configuration file and must match the identifier in the SSH server
 entry in the Directory Service. ::
 
   objectClass: top
@@ -136,7 +136,7 @@ Groups
 
 Both key providers and target keystores are not linked directly to an
 access profile but rather through a group. For both cases the group
-member attribute is obtained from the Keeto configuration file.
+member attribute is specified in the Keeto configuration file.
 
 +------------------------------------------+-----------+--------------+----------------------------------------+
 | Attribute                                | Mandatory | Single-Value | Description                            |

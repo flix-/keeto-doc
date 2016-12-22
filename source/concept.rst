@@ -8,9 +8,9 @@ The diagram shows an Keeto end to end flow. In the following each
 interaction is explained. Note that flow **(a)** is periodically and all
 others are run on each SSH connection attempt.
 
-**(a)** A Public Key Infrastructure (PKI) is responsible for the whole
-lifecycle management of X.509 certificates. This X.509 certificates are
-distributed to a Directory Service where they can be used by Keeto.
+**(a)** A Public Key Infrastructure (PKI) is responsible for managing
+the whole lifecycle of X.509 certificates. This managed X.509 certificates
+are distributed to a Directory Service where they can be used by Keeto.
 
 **(b)** The SSH connection is triggered by a SSH protocol aware client
 such as PuTTY, FileZilla or WinSCP. An OpenSSH server receives the
