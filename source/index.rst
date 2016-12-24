@@ -1,6 +1,8 @@
 Keeto Admin Guide
 =================
 
+.. image:: _static/keeto.png
+
 Table of Contents
 =================
 
