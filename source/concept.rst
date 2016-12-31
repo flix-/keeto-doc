@@ -4,9 +4,9 @@ Concept
 .. image:: _static/keeto-high-level-flow.png
    :align: center
 
-The diagram shows an Keeto end to end flow. In the following each
-interaction is explained. Note that flow **(a)** is periodically and all
-others are run on each SSH connection attempt.
+The diagram shows a Keeto end to end flow. Each interaction is explained
+in the following. Note that flow **(a)** is periodically and all others
+are run on each SSH connection attempt.
 
 **(a)** A Public Key Infrastructure (PKI) is responsible for managing
 the whole lifecycle of X.509 certificates. This managed X.509 certificates
