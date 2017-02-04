@@ -57,10 +57,8 @@ Configuration
 The following describes the configuration of the various components
 based on a installation from source. If an RPM package has been utilized
 certain steps do not need to be performed (see :ref:`rpm-installation`).
-Also notice that the samples directory is not present for an RPM based
-installation. However all sample files included in the source
-distribution are deployed as documentation during RPM installation.
-Their location can be determined as follows::
+Also notice that the location of the samples directory differs for an
+RPM based installation. It can be determined as follows::
 
     <user>$ rpm -qd keeto
 
