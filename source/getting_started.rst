@@ -54,8 +54,8 @@ is deployed.
 Configuration
 -------------
 
-This part describes the configuration of the various components based
-on a installation from source. If an RPM package has been utilized
+The following describes the configuration of the various components
+based on a installation from source. If an RPM package has been utilized
 certain steps do not need to be performed (see :ref:`rpm-installation`).
 Also notice that the samples directory is not present for an RPM based
 installation. However all sample files included in the source
