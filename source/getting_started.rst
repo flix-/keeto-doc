@@ -22,6 +22,9 @@ up Keeto.
 Installation
 ------------
 
+Source
+^^^^^^
+
 Grab the source tarball from https://keeto.io and unpack/build. Note
 that the library installation directory for PAM modules (--libdir)
 differs for various architectures/distros. Consult the documentation of
@@ -34,8 +37,32 @@ your distro to figure out the right path::
     <user>$ make check
     <root>$ make install
 
+.. _rpm-installation:
+
+RPM
+^^^
+
+Grab the RPM package from https://keeto.io and install::
+
+    <root>$ rpm -i keeto-0.2.0-0.1.beta.el7.centos.x86_64.rpm
+
+This installs the PAM modules and creates an initial configuration file
+keeto.conf as well as the authorized_keys and cert_store directories
+with the proper access permissions in /etc/ssh. Furthermore documentation
+is deployed.
+
 Configuration
 -------------
+
+This part describes the configuration of the various components based
+on a installation from source. If an RPM package has been utilized
+certain steps do not need to be performed (see :ref:`rpm-installation`).
+Also notice that the samples directory is not present for an RPM based
+installation. However all sample files included in the source
+distribution are deployed as documentation during RPM installation.
+Their location can be determined as follows::
+
+    <user>$ rpm -qd keeto
 
 Keeto
 ^^^^^
