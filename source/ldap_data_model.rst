@@ -32,7 +32,7 @@ entry in the Directory Service. ::
 |                    |           |              |                                  |
 |                    |           |              | See also: <ssh_server_uid>.      |
 +--------------------+-----------+--------------+----------------------------------+
-| keetoAccessProfile | yes       | no           | DN to Keeto access profile.      |
+| keetoAccessProfile | no        | no           | DN to Keeto access profile.      |
 +--------------------+-----------+--------------+----------------------------------+
 | description        | no        | no           | SSH server description.          |
 +--------------------+-----------+--------------+----------------------------------+
@@ -47,39 +47,42 @@ provide access to someone else's account.
 Direct Access Profile
 ^^^^^^^^^^^^^^^^^^^^^
 
-A direct access profile specifies a reference to a group of key
-providers that shall be able to login with it's own account. Each key
-provider's UID is checked against the UID of the user about to login.
-If they match the X.509 certificates of the key provider will be taken
-into account. Optionally keystore options can be specified that are
-used for all key providers. A direct access profile can be enabled /
-disabled. ::
+A direct access profile specifies references to either direct or groups
+of key providers that shall be able to login with it's own account.
+Each key provider's UID is checked against the UID of the user about
+to login. If they match the X.509 certificates of the key provider
+will be taken into account. Optionally keystore options can be specified
+that are used for all key providers. A direct access profile can be
+enabled / disabled. ::
 
   objectClass: top
   objectClass: keetoAccessProfile
   objectClass: keetoDirectAccessProfile
 
-+----------------------+-----------+--------------+-------------------------------------+
-| Attribute            | Mandatory | Single-Value | Description                         |
-+======================+===========+==============+=====================================+
-| cn                   | yes       | no           | RDN of direct access profile entry. |
-+----------------------+-----------+--------------+-------------------------------------+
-| keetoEnabled         | yes       | yes          | Enable / Disable profile.           |
-+----------------------+-----------+--------------+-------------------------------------+
-| keetoKeyProvider     | yes       | yes          | DN to Keeto key provider group.     |
-+----------------------+-----------+--------------+-------------------------------------+
-| keetoKeystoreOptions | no        | yes          | DN to Keeto keystore options.       |
-+----------------------+-----------+--------------+-------------------------------------+
-| description          | no        | no           | Direct access profile description.  |
-+----------------------+-----------+--------------+-------------------------------------+
++-----------------------+-----------+--------------+-------------------------------------+
+| Attribute             | Mandatory | Single-Value | Description                         |
++=======================+===========+==============+=====================================+
+| cn                    | yes       | no           | RDN of direct access profile entry. |
++-----------------------+-----------+--------------+-------------------------------------+
+| keetoEnabled          | yes       | yes          | Enable / Disable profile.           |
++-----------------------+-----------+--------------+-------------------------------------+
+| keetoKeyProvider      | no        | no           | DN to Keeto key provider.           |
++-----------------------+-----------+--------------+-------------------------------------+
+| keetoKeyProviderGroup | no        | no           | DN to Keeto key provider group.     |
++-----------------------+-----------+--------------+-------------------------------------+
+| keetoKeystoreOptions  | no        | yes          | DN to Keeto keystore options.       |
++-----------------------+-----------+--------------+-------------------------------------+
+| description           | no        | no           | Direct access profile description.  |
++-----------------------+-----------+--------------+-------------------------------------+
 
 Access On Behalf Profile
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
 Access on behalf profiles enable authentication on behalf of someone
 else. For that the UID of the user about to login is searched in the
-target keystore's. On match all valid keys of all key providers are
-synced into that target keystore. As with direct access profiles keystore
+target keystores which are either directly linked to the profile or
+through groups. On match all valid keys of all key providers are synced
+into that target keystore. As with direct access profiles keystore
 options can be specified optionally and the profile can be enabled /
 disabled. ::
 
@@ -87,21 +90,25 @@ disabled. ::
   objectClass: keetoAccessProfile
   objectClass: keetoAccessOnBehalfProfile
 
-+----------------------+-----------+--------------+----------------------------------------+
-| Attribute            | Mandatory | Single-Value | Description                            |
-+======================+===========+==============+========================================+
-| cn                   | yes       | no           | RDN of access on behalf profile entry. |
-+----------------------+-----------+--------------+----------------------------------------+
-| keetoEnabled         | yes       | yes          | Enable / Disable profile.              |
-+----------------------+-----------+--------------+----------------------------------------+
-| keetoKeyProvider     | yes       | yes          | DN to Keeto key provider group.        |
-+----------------------+-----------+--------------+----------------------------------------+
-| keetoTargetKeystore  | yes       | yes          | DN to Keeto target keystore group.     |
-+----------------------+-----------+--------------+----------------------------------------+
-| keetoKeystoreOptions | no        | yes          | DN to Keeto keystore options.          |
-+----------------------+-----------+--------------+----------------------------------------+
-| description          | no        | no           | Access on behalf profile description.  |
-+----------------------+-----------+--------------+----------------------------------------+
++--------------------------+-----------+--------------+----------------------------------------+
+| Attribute                | Mandatory | Single-Value | Description                            |
++==========================+===========+==============+========================================+
+| cn                       | yes       | no           | RDN of access on behalf profile entry. |
++--------------------------+-----------+--------------+----------------------------------------+
+| keetoEnabled             | yes       | yes          | Enable / Disable profile.              |
++--------------------------+-----------+--------------+----------------------------------------+
+| keetoKeyProvider         | no        | no           | DN to Keeto key provider.              |
++--------------------------+-----------+--------------+----------------------------------------+
+| keetoKeyProviderGroup    | no        | no           | DN to Keeto key provider group.        |
++--------------------------+-----------+--------------+----------------------------------------+
+| keetoTargetKeystore      | no        | no           | DN to Keeto target keystore.           |
++--------------------------+-----------+--------------+----------------------------------------+
+| keetoTargetKeystoreGroup | no        | no           | DN to Keeto target keystore group.     |
++--------------------------+-----------+--------------+----------------------------------------+
+| keetoKeystoreOptions     | no        | yes          | DN to Keeto keystore options.          |
++--------------------------+-----------+--------------+----------------------------------------+
+| description              | no        | no           | Access on behalf profile description.  |
++--------------------------+-----------+--------------+----------------------------------------+
 
 Key Provider
 ------------
@@ -134,9 +141,9 @@ specifies the accounts that can be used on behalf of the key providers.
 Groups
 ------
 
-Both key providers and target keystores are not linked directly to an
-access profile but rather through a group. For both cases the group
-member attribute is specified in the Keeto configuration file.
+Key providers and target keystores can be linked to an access profile
+throug groups. For both cases the group member attribute is specified
+in the Keeto configuration file.
 
 +------------------------------------------+-----------+--------------+----------------------------------------+
 | Attribute                                | Mandatory | Single-Value | Description                            |

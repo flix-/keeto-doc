@@ -4,7 +4,7 @@ Getting Started
 Prerequisites
 -------------
 
-The following packages are needed in order to run Keeto:
+The following packages are needed in order to build/run Keeto:
 
 * OpenSSH >= 6.2
 * Directory Service
@@ -30,8 +30,8 @@ that the library installation directory for PAM modules (--libdir)
 differs for various architectures/distros. Consult the documentation of
 your distro to figure out the right path::
 
-    <user>$ tar xvfz keeto-0.2.0-beta.tar.gz
-    <user>$ cd keeto-0.2.0-beta
+    <user>$ tar xvfz keeto-0.3.0-beta.tar.gz
+    <user>$ cd keeto-0.3.0-beta
     <user>$ ./configure --libdir=/lib64/security
     <user>$ make
     <user>$ make check
@@ -44,7 +44,7 @@ RPM
 
 Grab the RPM package from https://keeto.io and install::
 
-    <root>$ rpm -i keeto-0.2.0-0.1.beta.el7.centos.x86_64.rpm
+    <root>$ rpm -i keeto-0.3.0-0.1.beta.el7.centos.x86_64.rpm
 
 This installs the PAM modules and creates an initial configuration file
 keeto.conf as well as the authorized_keys and cert_store directories
