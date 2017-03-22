@@ -79,9 +79,9 @@ Furthermore create a directory where the authorized_keys files of the
 users are placed and a directory for trusted CA certificates and CRL's::
 
     <root>$ mkdir $SSH_DIR/authorized_keys
-    <root>$ chmod 711 $SSH_DIR/authorized_keys
+    <root>$ chmod 755 $SSH_DIR/authorized_keys
     <root>$ mkdir $SSH_DIR/cert_store
-    <root>$ chmod 700 $SSH_DIR/cert_store
+    <root>$ chmod 755 $SSH_DIR/cert_store
 
 Copy all trusted CA certificates and CRL's (optional) for verifying the
 user certificates into the cert store. Make sure the whole chain except
