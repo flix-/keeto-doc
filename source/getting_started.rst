@@ -10,11 +10,12 @@ The following packages are needed in order to build/run Keeto:
 * Directory Service
 * Syslog
 * PAM
-* pkg-config >= 0.9.9
+* pkg-config >= 0.9.9 (build only)
 * libConfuse >= 2.7
-* libcheck >= 0.9.9
-* OpenSSL 1.0.x
+* libcheck >= 0.9.9 (build only)
+* OpenSSL >= 1.0
 * libldap
+* c_rehash
 
 Make sure those components are installed and configured prior setting
 up Keeto.
@@ -85,7 +86,7 @@ users are placed and a directory for trusted CA certificates and CRL's::
 
 Copy all trusted CA certificates and CRL's (optional) for verifying the
 user certificates into the cert store. Make sure the whole chain except
-the end entity certificates are present. If STARTTLS is used for the
+the end entity certificates are present. If StartTLS is used for the
 the LDAP connection also include the necessary certificates here.
 Finally create symlinks with::
 
@@ -129,6 +130,5 @@ Keeto consults a Directory Service in order to obtain current access
 permissions and keys. The relevant entities and their relationship
 are described in :ref:`ldap-data-model`. General configuration is software
 dependent and not not outlined here. The samples directory however
-contains relevant configurations for OpenLDAP and LDIF files for setting
-up a testing environment.
+contains relevant configuration files for the OpenLDAP directory server.
 

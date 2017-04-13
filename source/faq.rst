@@ -13,25 +13,28 @@ through the Match directive as follows::
         AuthenticationMethods publickey
         AuthorizedKeysFile .ssh/authorized_keys
 
+Not all certificates/CRL's in the certificate store are utilized
+----------------------------------------------------------------
 
-Not all certificates / CRL's in the certificate store are utilized
-------------------------------------------------------------------
-
-Make sure that every certificate / CRL has a corresponding symlink
-created with the c_rehash utility. Beware that older version of c_rehash
-only processed files with the extension .pem. If you are using such a
-version consider symlinking or renaming the original file with the proper
+Make sure that every certificate/CRL has a corresponding symlink created
+with the c_rehash utility. Beware that older version of c_rehash only
+processed files with the extension .pem. If you are using such a version
+consider symlinking or renaming the original file with the proper
 extension.
 
-Keeto doesn't seem to check the LDAP server certificate chain against CRL
--------------------------------------------------------------------------
+Keeto doesn't seem to check the LDAP server certificate chain against a CRL
+---------------------------------------------------------------------------
 
 If Keeto has been configured to check CRL's it depends on the crypto
 library libldap has been linked against. As for now CRL checking is only
 supported if libldap has been linked against OpenSSL. In any other case
-the CRL check is skipped. Note that this only applies to the verification
-of the LDAP server certificate chain during secure connection
-establishment (StartTLS/LDAPS). Validation of user certificates against
-CRL will always be performed if 'check_crl' has been set to 1 in the
-Keeto configuration file.
+the CRL check is skipped. Keeto logs the following entry if the CRL check
+cannot be performed through libldap::
+
+    [C] failed to set ldap option: key 'LDAP_OPT_X_TLS_CRLCHECK', value '2'
+
+Note that this only applies to the verification of the LDAP server
+certificate chain during secure connection establishment (StartTLS/LDAPS).
+Validation of user certificates against a CRL will always be performed
+if 'check_crl' has been set to '1' in the Keeto configuration file.
 

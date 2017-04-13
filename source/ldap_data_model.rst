@@ -17,8 +17,8 @@ The SSH server entry is the starting point for the determination of
 access permissions and key material. It specifies the relevant access
 profiles that shall be taken into account. Keeto locates the right
 SSH server entry through a unique identifier that is specified in the
-Keeto configuration file and must match the identifier in the SSH server
-entry in the Directory Service. ::
+Keeto configuration file and must match the identifier within the SSH
+server entry in the Directory Service. ::
 
   objectClass: top
   objectClass: keetoSSHServer
@@ -53,7 +53,7 @@ Each key provider's UID is checked against the UID of the user about
 to login. If they match the X.509 certificates of the key provider
 will be taken into account. Optionally keystore options can be specified
 that are used for all key providers. A direct access profile can be
-enabled / disabled. ::
+enabled/disabled. ::
 
   objectClass: top
   objectClass: keetoAccessProfile
@@ -64,7 +64,7 @@ enabled / disabled. ::
 +=======================+===========+==============+=====================================+
 | cn                    | yes       | no           | RDN of direct access profile entry. |
 +-----------------------+-----------+--------------+-------------------------------------+
-| keetoEnabled          | yes       | yes          | Enable / Disable profile.           |
+| keetoEnabled          | yes       | yes          | Enable/Disable profile.             |
 +-----------------------+-----------+--------------+-------------------------------------+
 | keetoKeyProvider      | no        | no           | DN to Keeto key provider.           |
 +-----------------------+-----------+--------------+-------------------------------------+
@@ -83,8 +83,8 @@ else. For that the UID of the user about to login is searched in the
 target keystores which are either directly linked to the profile or
 through groups. On match all valid keys of all key providers are synced
 into that target keystore. As with direct access profiles keystore
-options can be specified optionally and the profile can be enabled /
-disabled. ::
+options can be specified optionally and the profile can be
+enabled/disabled. ::
 
   objectClass: top
   objectClass: keetoAccessProfile
@@ -95,7 +95,7 @@ disabled. ::
 +==========================+===========+==============+========================================+
 | cn                       | yes       | no           | RDN of access on behalf profile entry. |
 +--------------------------+-----------+--------------+----------------------------------------+
-| keetoEnabled             | yes       | yes          | Enable / Disable profile.              |
+| keetoEnabled             | yes       | yes          | Enable/Disable profile.                |
 +--------------------------+-----------+--------------+----------------------------------------+
 | keetoKeyProvider         | no        | no           | DN to Keeto key provider.              |
 +--------------------------+-----------+--------------+----------------------------------------+
@@ -148,7 +148,7 @@ in the Keeto configuration file.
 +------------------------------------------+-----------+--------------+----------------------------------------+
 | Attribute                                | Mandatory | Single-Value | Description                            |
 +==========================================+===========+==============+========================================+
-| <ldap_key_provider_group_member_attr> /  | yes       | no           | DN to key provider / target keystore.  |
+| <ldap_key_provider_group_member_attr> /  | yes       | no           | DN to key provider/target keystore.    |
 |                                          |           |              |                                        |
 | <ldap_target_keystore_group_member_attr> |           |              |                                        |
 +------------------------------------------+-----------+--------------+----------------------------------------+

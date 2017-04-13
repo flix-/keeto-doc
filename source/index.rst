@@ -14,5 +14,6 @@ Table of Contents
    concept
    getting_started
    ldap_data_model
+   docker
    faq
 
