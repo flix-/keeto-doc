@@ -22,7 +22,7 @@ processed files with the extension .pem. If you are using such a version
 consider symlinking or renaming the original file with the proper
 extension.
 
-Keeto doesn't seem to check the LDAP server certificate chain against a CRL
+Keeto doesn't seem to check the LDAP server certificate chain against the CRL
 ---------------------------------------------------------------------------
 
 If Keeto has been configured to check CRL's it depends on the crypto
@@ -35,6 +35,6 @@ cannot be performed through libldap::
 
 Note that this only applies to the verification of the LDAP server
 certificate chain during secure connection establishment (StartTLS/LDAPS).
-Validation of user certificates against a CRL will always be performed
+Validation of user certificates against the CRL will always be performed
 if 'check_crl' has been set to '1' in the Keeto configuration file.
 
