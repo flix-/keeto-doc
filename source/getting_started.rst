@@ -4,7 +4,7 @@ Getting Started
 Prerequisites
 -------------
 
-The following packages are needed in order to build/run Keeto:
+The following software packages are needed in order to build/run Keeto:
 
 * OpenSSH >= 6.2
 * Directory Service

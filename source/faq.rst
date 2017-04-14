@@ -23,7 +23,7 @@ consider symlinking or renaming the original file with the proper
 extension.
 
 Keeto doesn't seem to check the LDAP server certificate chain against the CRL
----------------------------------------------------------------------------
+-----------------------------------------------------------------------------
 
 If Keeto has been configured to check CRL's it depends on the crypto
 library libldap has been linked against. As for now CRL checking is only

@@ -30,7 +30,7 @@ server entry in the Directory Service. ::
 +--------------------+-----------+--------------+----------------------------------+
 | uid                | yes       | no           | Unique identifier of SSH server. |
 |                    |           |              |                                  |
-|                    |           |              | See also: <ssh_server_uid>.      |
+|                    |           |              | See also: <ldap_ssh_server_uid>. |
 +--------------------+-----------+--------------+----------------------------------+
 | keetoAccessProfile | no        | no           | DN to Keeto access profile.      |
 +--------------------+-----------+--------------+----------------------------------+
@@ -47,10 +47,10 @@ provide access to someone else's account.
 Direct Access Profile
 ^^^^^^^^^^^^^^^^^^^^^
 
-A direct access profile specifies references to either direct or groups
-of key providers that shall be able to login with it's own account.
-Each key provider's UID is checked against the UID of the user about
-to login. If they match the X.509 certificates of the key provider
+A direct access profile specifies references to key providers either
+directly or through groups that shall be able to login with it's own
+account. Each key provider's UID is checked against the UID of the user
+about to login. If they match the X.509 certificates of the key provider
 will be taken into account. Optionally keystore options can be specified
 that are used for all key providers. A direct access profile can be
 enabled/disabled. ::
@@ -64,7 +64,7 @@ enabled/disabled. ::
 +=======================+===========+==============+=====================================+
 | cn                    | yes       | no           | RDN of direct access profile entry. |
 +-----------------------+-----------+--------------+-------------------------------------+
-| keetoEnabled          | yes       | yes          | Enable/Disable profile.             |
+| keetoEnabled          | yes       | yes          | Enable/Disable access profile.      |
 +-----------------------+-----------+--------------+-------------------------------------+
 | keetoKeyProvider      | no        | no           | DN to Keeto key provider.           |
 +-----------------------+-----------+--------------+-------------------------------------+
@@ -95,7 +95,7 @@ enabled/disabled. ::
 +==========================+===========+==============+========================================+
 | cn                       | yes       | no           | RDN of access on behalf profile entry. |
 +--------------------------+-----------+--------------+----------------------------------------+
-| keetoEnabled             | yes       | yes          | Enable/Disable profile.                |
+| keetoEnabled             | yes       | yes          | Enable/Disable access profile.         |
 +--------------------------+-----------+--------------+----------------------------------------+
 | keetoKeyProvider         | no        | no           | DN to Keeto key provider.              |
 +--------------------------+-----------+--------------+----------------------------------------+
