@@ -1,20 +1,27 @@
 Getting Started
 ===============
 
+This chapter explains how to install and configure Keeto and its
+integration into OpenSSH. A description of the LDAP schema can be found
+in :doc:`ldap_data_model`. You might also have a look at the fully
+configured Docker environment before starting from scratch yourself.
+A setup guide can be found at :doc:`docker`.
+
 Prerequisites
 -------------
 
-The following packages are needed in order to run Keeto:
+The following software packages are needed in order to build/run Keeto:
 
 * OpenSSH >= 6.2
 * Directory Service
 * Syslog
 * PAM
-* pkg-config >= 0.9.9
+* pkg-config >= 0.9.9 (build only)
 * libConfuse >= 2.7
-* libcheck >= 0.9.9
-* OpenSSL 1.0.x
+* libcheck >= 0.9.9 (build only)
+* OpenSSL >= 1.0
 * libldap
+* c_rehash
 
 Make sure those components are installed and configured prior setting
 up Keeto.
@@ -30,8 +37,9 @@ that the library installation directory for PAM modules (--libdir)
 differs for various architectures/distros. Consult the documentation of
 your distro to figure out the right path::
 
-    <user>$ tar xvfz keeto-0.2.0-beta.tar.gz
-    <user>$ cd keeto-0.2.0-beta
+    <user>$ wget https://keeto.io/static/downloads/keeto-0.3.0-beta/keeto-0.3.0-beta.tar.gz
+    <user>$ tar xvfz keeto-0.3.0-beta.tar.gz
+    <user>$ cd keeto-0.3.0-beta
     <user>$ ./configure --libdir=/lib64/security
     <user>$ make
     <user>$ make check
@@ -44,7 +52,8 @@ RPM
 
 Grab the RPM package from https://keeto.io and install::
 
-    <root>$ rpm -i keeto-0.2.0-0.1.beta.el7.centos.x86_64.rpm
+    <user>$ wget https://keeto.io/static/downloads/keeto-0.3.0-beta/keeto-0.3.0-0.1.beta.el7.centos.x86_64.rpm
+    <root>$ rpm -i keeto-0.3.0-0.1.beta.el7.centos.x86_64.rpm
 
 This installs the PAM modules and creates an initial configuration file
 keeto.conf as well as the authorized_keys and cert_store directories
@@ -79,13 +88,13 @@ Furthermore create a directory where the authorized_keys files of the
 users are placed and a directory for trusted CA certificates and CRL's::
 
     <root>$ mkdir $SSH_DIR/authorized_keys
-    <root>$ chmod 711 $SSH_DIR/authorized_keys
+    <root>$ chmod 755 $SSH_DIR/authorized_keys
     <root>$ mkdir $SSH_DIR/cert_store
-    <root>$ chmod 700 $SSH_DIR/cert_store
+    <root>$ chmod 755 $SSH_DIR/cert_store
 
 Copy all trusted CA certificates and CRL's (optional) for verifying the
 user certificates into the cert store. Make sure the whole chain except
-the end entity certificates are present. If STARTTLS is used for the
+the end entity certificates are present. If StartTLS is used for the
 the LDAP connection also include the necessary certificates here.
 Finally create symlinks with::
 
@@ -127,8 +136,7 @@ Directory Service
 
 Keeto consults a Directory Service in order to obtain current access
 permissions and keys. The relevant entities and their relationship
-are described in :ref:`ldap-data-model`. General configuration is software
+are described in :doc:`ldap_data_model`. General configuration is software
 dependent and not not outlined here. The samples directory however
-contains relevant configurations for OpenLDAP and LDIF files for setting
-up a testing environment.
+contains relevant configuration files for the OpenLDAP Directory Service.
 
