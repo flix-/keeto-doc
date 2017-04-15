@@ -138,7 +138,7 @@ Usage
 -----
 
 Now that the environment is up and running you are able to play around
-and gain a better understanding of Keeto. Configure your favorite LDAP
+and gain a better understanding of Keeto. Configure your favourite LDAP
 client with the settings described in :ref:`openldap-settings` and
 browse/modify the content in the OpenLDAP Directory Service. If you are
 using Apache Directory Studio you might wanna import the connection
@@ -146,7 +146,7 @@ settings from the 'samples/docker/misc' folder. The environment comes
 with some predefined access permissions as described in
 :ref:`openssh-access-permissions`. The private key material for the
 various logins are available in the 'samples/docker/keys' folder. Note
-that certain SSH clients require the private key to have certain access
+that some SSH clients require the private key to have certain access
 permissions. If you are using such a client change permissions of the
 private key file accordingly.
 
