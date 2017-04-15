@@ -1,5 +1,3 @@
-.. _ldap-data-model:
-
 LDAP Data Model
 ===============
 

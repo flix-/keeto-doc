@@ -1,6 +1,12 @@
 Getting Started
 ===============
 
+This chapter explains how to install and configure Keeto and its
+integration into OpenSSH. A description of the LDAP schema can be found
+in :doc:`ldap_data_model`. You might also have a look at the fully
+configured Docker environment before starting from scratch yourself.
+A setup guide can be found at :doc:`docker`.
+
 Prerequisites
 -------------
 
@@ -31,6 +37,7 @@ that the library installation directory for PAM modules (--libdir)
 differs for various architectures/distros. Consult the documentation of
 your distro to figure out the right path::
 
+    <user>$ wget https://keeto.io/static/downloads/keeto-0.3.0-beta/keeto-0.3.0-beta.tar.gz
     <user>$ tar xvfz keeto-0.3.0-beta.tar.gz
     <user>$ cd keeto-0.3.0-beta
     <user>$ ./configure --libdir=/lib64/security
@@ -45,6 +52,7 @@ RPM
 
 Grab the RPM package from https://keeto.io and install::
 
+    <user>$ wget https://keeto.io/static/downloads/keeto-0.3.0-beta/keeto-0.3.0-0.1.beta.el7.centos.x86_64.rpm
     <root>$ rpm -i keeto-0.3.0-0.1.beta.el7.centos.x86_64.rpm
 
 This installs the PAM modules and creates an initial configuration file
@@ -128,7 +136,7 @@ Directory Service
 
 Keeto consults a Directory Service in order to obtain current access
 permissions and keys. The relevant entities and their relationship
-are described in :ref:`ldap-data-model`. General configuration is software
+are described in :doc:`ldap_data_model`. General configuration is software
 dependent and not not outlined here. The samples directory however
-contains relevant configuration files for the OpenLDAP directory server.
+contains relevant configuration files for the OpenLDAP Directory Service.
 

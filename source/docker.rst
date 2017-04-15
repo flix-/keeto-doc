@@ -27,6 +27,8 @@ to the local machine:
 +================+=====================+================+
 | keeto-openldap | LDAP Plain/StartTLS | 127.0.0.1:1389 |
 +----------------+---------------------+----------------+
+| keeto-openldap | LDAPS               | 127.0.0.1:1636 |
++----------------+---------------------+----------------+
 | keeto-openssh  | SSH                 | 127.0.0.1:1022 |
 +----------------+---------------------+----------------+
 
@@ -70,7 +72,7 @@ OpenSSH Access Permissions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 +-----------+---------------+------------------+
-| User      | Direct Access | Access On Behalf |
+| Key/User  | Direct Access | Access On Behalf |
 +===========+===============+==================+
 | birgit    | Yes           | \-               |
 +-----------+---------------+------------------+
@@ -106,18 +108,11 @@ for public key authentication.
 Setup
 -----
 
-All files needed to setup the Docker environment are included in the
-'samples' directory shipped with the source distribution/RPM package.
-If the RPM package has already been utilized to install Keeto use the
-following command to locate the 'samples' directory and change to
-the 'docker' directory within::
+Grab the source code tarball from https://keeto.io and unpack the
+distribution. All files needed to setup the Docker environment are
+included in the 'samples/docker' directory::
 
-    <user>$ rpm -qd keeto
-
-If you would like to use the source distribution grab the tarball from
-https://keeto.io unpack the distribution and change to the 'docker'
-directory within the 'samples' folder::
-
+    <user>$ wget https://keeto.io/static/downloads/keeto-0.3.0-beta/keeto-0.3.0-beta.tar.gz
     <user>$ tar xvfz keeto-0.3.0-beta.tar.gz
     <user>$ cd keeto-0.3.0-beta/samples/docker
 
@@ -127,8 +122,8 @@ command::
     <root>$ docker-compose up -d
 
 Docker will download the images if they are not already available
-locally and then start the environment. Finally you should see the
-following output::
+locally and subsequently start the environment. Finally you should see
+the following output::
 
     Creating network "docker_keeto-net" with driver "bridge"
     Creating keeto-openldap
@@ -143,19 +138,24 @@ Usage
 -----
 
 Now that the environment is up and running you are able to play around
-and gain a better understanding of Keeto. You should definitely
-configure your favorite LDAP client with the settings described in
-:ref:`openldap-settings` and browse/modify the content in the
-OpenLDAP Directory Service. If you are using Apache Directory Studio you
-might wanna import the connection settings from the 'samples/docker/misc'
-folder. Furthermore you should try the various predefined logins with
-your SSH client and check log files. The OpenSSH access permissions can
-be found at :ref:`openssh-access-permissions`. Keys for each user are
-available in the 'samples/docker/keys' folder.
+and gain a better understanding of Keeto. Configure your favorite LDAP
+client with the settings described in :ref:`openldap-settings` and
+browse/modify the content in the OpenLDAP Directory Service. If you are
+using Apache Directory Studio you might wanna import the connection
+settings from the 'samples/docker/misc' folder. The environment comes
+with some predefined access permissions as described in
+:ref:`openssh-access-permissions`. The private key material for the
+various logins are available in the 'samples/docker/keys' folder. Note
+that certain SSH clients require the private key to have certain access
+permissions. If you are using such a client change permissions of the
+private key file accordingly.
 
-The following shows two exemplary logins with the OpenSSH SSH client
-for a direct access and an access on behalf of another account::
+The following two examples show logins with the OpenSSH SSH client for
+a user that has direct access and another one that has access on behalf
+of another account::
 
-    <user>$ ssh -i samples/docker/keys/birgit-key.pem -p 1022 birgit@localhost
-    <user>$ ssh -i samples/docker/keys/oliver-key.pem -p 1022 slapd@localhost
+    <user>$ chmod 600 keys/birgit-key.pem
+    <user>$ ssh -i keys/birgit-key.pem -p 1022 birgit@localhost
+    <user>$ chmod 600 keys/oliver-key.pem
+    <user>$ ssh -i keys/oliver-key.pem -p 1022 slapd@localhost
 
