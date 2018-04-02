@@ -37,9 +37,9 @@ that the library installation directory for PAM modules (--libdir)
 differs for various architectures/distros. Consult the documentation of
 your distro to figure out the right path::
 
-    <user>$ wget https://keeto.io/static/downloads/keeto-0.3.0-beta/keeto-0.3.0-beta.tar.gz
-    <user>$ tar xvfz keeto-0.3.0-beta.tar.gz
-    <user>$ cd keeto-0.3.0-beta
+    <user>$ wget https://keeto.io/static/downloads/keeto-0.4.0-beta/keeto-0.4.0-beta.tar.gz
+    <user>$ tar xvfz keeto-0.4.0-beta.tar.gz
+    <user>$ cd keeto-0.4.0-beta
     <user>$ ./configure --libdir=/lib64/security
     <user>$ make
     <user>$ make check
@@ -52,8 +52,8 @@ RPM
 
 Grab the RPM package from https://keeto.io and install::
 
-    <user>$ wget https://keeto.io/static/downloads/keeto-0.3.0-beta/keeto-0.3.0-0.1.beta.el7.centos.x86_64.rpm
-    <root>$ rpm -i keeto-0.3.0-0.1.beta.el7.centos.x86_64.rpm
+    <user>$ wget https://keeto.io/static/downloads/keeto-0.4.0-beta/keeto-0.4.0-0.1.beta.el7.centos.x86_64.rpm
+    <root>$ rpm -i keeto-0.4.0-0.1.beta.el7.centos.x86_64.rpm
 
 This installs the PAM modules and creates an initial configuration file
 keeto.conf as well as the authorized_keys and cert_store directories
@@ -65,7 +65,7 @@ Configuration
 
 The following describes the configuration of the various components
 based on a installation from source. If an RPM package has been utilized
-certain steps do not need to be performed (see :ref:`rpm-installation`).
+certain steps do not need to be performed (see: :ref:`rpm-installation`).
 Also notice that the location of the samples directory differs for an
 RPM based installation. It can be determined as follows::
 
@@ -112,9 +112,17 @@ sshd_config file::
     UsePAM yes
     AuthenticationMethods keyboard-interactive:pam,publickey
 
-If you are starting from scratch consider using the sshd_config file
-provided in the samples directory as a starting point. Restart OpenSSH
-after all changes are made.
+Optionally enable the processing of environment variables to export the
+real user (see: :ref:`faq-real-user`) to the environment and specify the
+algorithm used to hash the SSH keys fingerprint::
+
+    PermitUserEnvironment yes
+    #FingerprintHash md5
+    FingerprintHash sha25
+
+If you are starting from scratch consider having a look at the
+sshd_config file provided in the samples directory as a starting point.
+Restart OpenSSH after all changes are made.
 
 PAM
 ^^^
@@ -123,6 +131,9 @@ Copy the PAM configuration file for sshd to inject Keeto into the
 authentication process of OpenSSH::
 
     <root>$ cp samples/sshd /etc/pam.d
+
+Comment the optional audit module if you don't need the
+<uid, key fingerprint> mappings logged.
 
 Syslog
 ^^^^^^
