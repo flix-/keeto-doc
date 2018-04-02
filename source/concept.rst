@@ -18,7 +18,7 @@ connection attempt.
 
 **(c)** The control flow is passed over to Keeto which establishes a
 connection to the Directory Service and determines the current access
-permissions and retrieves relevant certificates for that connection.
+permissions and retrieves relevant X.509 certificates for that connection.
 
 **(d)** Keeto validates the X.509 certificates, extracts and transforms
 public keys and writes them to the appropriate authorized_keys file.

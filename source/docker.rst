@@ -9,45 +9,41 @@ describes how to set it up and ultimately use it.
 Overview
 --------
 
-The Docker environment consists of the two containers 'keeto-openldap'
-and 'keeto-openssh'. 'keeto-openldap' provides a Directory Service based
-on OpenLDAP and 'keeto-openssh' runs an OpenSSH server configured with
-Keeto. The Directory Service contains various entries reflecting the
-access permissions, key material, users etc. for the OpenSSH server
-running within the 'keeto-openssh' container.
+The Docker environment consists of the following containers:
+
++-----------------+------------------------------+
+| Container       | Description                  |
++=================+==============================+
+| keeto-openssh   | Keeto-enabled OpenSSH server |
++-----------------+------------------------------+
+| keeto-openldap  | Directory Service            |
++-----------------+------------------------------+
+| keeto-syslog-ng | Central logging server       |
++-----------------+------------------------------+
+| keeto-mariadb   | Audit database               |
++-----------------+------------------------------+
+
+The OpenSSH server obtains access permissions and key material from the
+Directory Service and sends audit relevant SSH session information to
+the central logging server which stores the records in the audit
+database.
 
 Services
 ^^^^^^^^
 
-The following ports are exposed by the Docker environment and bound
-to the local machine:
+The following ports are exposed by the Docker environment:
 
-+----------------+---------------------+----------------+
-| Container      | Protocol            | Port           |
-+================+=====================+================+
-| keeto-openldap | LDAP Plain/StartTLS | 127.0.0.1:1389 |
-+----------------+---------------------+----------------+
-| keeto-openldap | LDAPS               | 127.0.0.1:1636 |
-+----------------+---------------------+----------------+
-| keeto-openssh  | SSH                 | 127.0.0.1:1022 |
-+----------------+---------------------+----------------+
-
-Syslog Settings
-^^^^^^^^^^^^^^^
-
-The local /dev/log socket is mounted to the container's filesystem in
-order to obtain syslog messages from container components. The
-following syslog identifiers/facilities are used:
-
-+-----------+-------------------+-----------------+
-| Component | Syslog Identifier | Syslog Facility |
-+===========+===================+=================+
-| OpenLDAP  | slapd             | LOG_LOCAL4      |
-+-----------+-------------------+-----------------+
-| OpenSSH   | sshd              | LOG_LOCAL0      |
-+-----------+-------------------+-----------------+
-| Keeto     | keeto             | LOG_LOCAL1      |
-+-----------+-------------------+-----------------+
++----------------+---------------------+-----------------+
+| Container      | Protocol            | Ip:Port         |
++================+=====================+=================+
+| keeto-openssh  | SSH                 | 127.0.0.1:1022  |
++----------------+---------------------+-----------------+
+| keeto-openldap | LDAP Plain/StartTLS | 127.0.0.1:1389  |
++----------------+---------------------+-----------------+
+| keeto-openldap | LDAPS               | 127.0.0.1:1636  |
++----------------+---------------------+-----------------+
+| keeto-mariadb  | MariaDB             | 127.0.0.1:13306 |
++----------------+---------------------+-----------------+
 
 .. _openldap-settings:
 
@@ -65,6 +61,23 @@ OpenLDAP Settings
 +---------------+-------------------------------------+
 | Bind password | test123                             |
 +---------------+-------------------------------------+
+
+.. _mariadb-settings:
+
+MariaDB Settings
+^^^^^^^^^^^^^^^^
+
++----------+-----------------+
+| Option   | Value           |
++==========+=================+
+| Ip:Port  | 127.0.0.1:13306 |
++----------+-----------------+
+| Database | keeto-audit     |
++----------+-----------------+
+| Username | root            |
++----------+-----------------+
+| Password | test123         |
++----------+-----------------+
 
 .. _openssh-access-permissions:
 
@@ -95,9 +108,9 @@ Docker environment:
 
 * Docker
 * Docker Compose
-* LDAP client
 * SSH client
-* Syslog (optional)
+* LDAP client (optional)
+* MariaDB client (optional)
 
 Although any LDAP client will do Apache Directory Studio is recommended
 as Keeto provides an export of the connection settings needed to
@@ -112,9 +125,9 @@ Grab the source code tarball from https://keeto.io and unpack the
 distribution. All files needed to setup the Docker environment are
 included in the 'samples/docker' directory::
 
-    <user>$ wget https://keeto.io/static/downloads/keeto-0.3.0-beta/keeto-0.3.0-beta.tar.gz
-    <user>$ tar xvfz keeto-0.3.0-beta.tar.gz
-    <user>$ cd keeto-0.3.0-beta/samples/docker
+    <user>$ wget https://keeto.io/static/downloads/keeto-0.4.0-beta/keeto-0.4.0-beta.tar.gz
+    <user>$ tar xvfz keeto-0.4.0-beta.tar.gz
+    <user>$ cd keeto-0.4.0-beta/samples/docker
 
 Now start the containers using Docker Compose with the following
 command::
@@ -126,13 +139,12 @@ locally and subsequently start the environment. Finally you should see
 the following output::
 
     Creating network "docker_keeto-net" with driver "bridge"
+    Creating keeto-mariadb
     Creating keeto-openldap
+    Creating keeto-syslog-ng
     Creating keeto-openssh
 
 Thats it! The Keeto Docker environment is now fully operational.
-Optionally configure your local syslog daemon to log messages from
-container components. A sample configuration file for syslog-ng can be
-found in the 'samples' directory.
 
 Usage
 -----
@@ -158,4 +170,7 @@ of another account::
     <user>$ ssh -i keys/birgit-key.pem -p 1022 birgit@localhost
     <user>$ chmod 600 keys/oliver-key.pem
     <user>$ ssh -i keys/oliver-key.pem -p 1022 slapd@localhost
+
+Connect to the database (see: :ref:`mariadb-settings`) to have a look at
+the SSH session logging.
 
