@@ -125,9 +125,9 @@ Grab the source code tarball from https://keeto.io and unpack the
 distribution. All files needed to setup the Docker environment are
 included in the 'samples/docker' directory::
 
-    <user>$ wget https://keeto.io/static/downloads/keeto-0.4.0-beta/keeto-0.4.0-beta.tar.gz
-    <user>$ tar xvfz keeto-0.4.0-beta.tar.gz
-    <user>$ cd keeto-0.4.0-beta/samples/docker
+    <user>$ wget https://keeto.io/static/downloads/keeto-0.4.1-beta/keeto-0.4.1-beta.tar.gz
+    <user>$ tar xvfz keeto-0.4.1-beta.tar.gz
+    <user>$ cd keeto-0.4.1-beta/samples/docker
 
 Now start the containers using Docker Compose with the following
 command::
