@@ -43,9 +43,9 @@ if 'check_crl' has been set to '1' in the Keeto configuration file.
 What is the real user exported to the environment actually?
 -----------------------------------------------------------
 
-The environment variable $KEETO_REAL_USER contains the UID of the user
-who owns the key that was used during public key authentication. This
-is meaningful for scenarios where an account is shared across different
+The environment variable $KEETOREALUSER contains the UID of the user who
+owns the key that was used during public key authentication. This is
+meaningful for scenarios where an account is shared across different
 users and one would like to apply certain configuration based on the
 real entity.
 
