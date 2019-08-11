@@ -52,8 +52,8 @@ RPM
 
 Grab the RPM package from https://github.com/flix-/keeto and install::
 
-    <user>$ wget https://github.com/flix-/keeto/releases/download/0.4.1-beta/keeto-0.4.1-0.1.beta.el7.centos.x86_64.rpm
-    <root>$ rpm -i keeto-0.4.1-0.1.beta.el7.centos.x86_64.rpm
+    <user>$ wget https://github.com/flix-/keeto/releases/download/0.4.1-beta/keeto-0.4.1-0.1.beta.el7.x86_64.rpm
+    <root>$ rpm -i keeto-0.4.1-0.1.beta.el7.x86_64.rpm
 
 This installs the PAM modules and creates an initial configuration file
 keeto.conf as well as the authorized_keys and cert_store directories
