@@ -32,15 +32,15 @@ Installation
 Source
 ^^^^^^
 
-Grab the source tarball from https://keeto.io and unpack/build. Note
-that the library installation directory for PAM modules (--libdir)
+Grab the source tarball from https://github.com/flix-/keeto and unpack/build.
+Note that the library installation directory for PAM modules (--libdir)
 differs for various architectures/distros. Consult the documentation of
 your distro to figure out the right path::
 
-    <user>$ wget https://keeto.io/static/downloads/keeto-0.4.1-beta/keeto-0.4.1-beta.tar.gz
+    <user>$ wget https://github.com/flix-/keeto/releases/download/0.4.1-beta/keeto-0.4.1-beta.tar.gz
     <user>$ tar xvfz keeto-0.4.1-beta.tar.gz
     <user>$ cd keeto-0.4.1-beta
-    <user>$ ./configure --libdir=/lib64/security
+    <user>$ ./configure --libdir=/lib/security
     <user>$ make
     <user>$ make check
     <root>$ make install
@@ -50,9 +50,9 @@ your distro to figure out the right path::
 RPM
 ^^^
 
-Grab the RPM package from https://keeto.io and install::
+Grab the RPM package from https://github.com/flix-/keeto and install::
 
-    <user>$ wget https://keeto.io/static/downloads/keeto-0.4.1-beta/keeto-0.4.1-0.1.beta.el7.centos.x86_64.rpm
+    <user>$ wget https://github.com/flix-/keeto/releases/download/0.4.1-beta/keeto-0.4.1-0.1.beta.el7.centos.x86_64.rpm
     <root>$ rpm -i keeto-0.4.1-0.1.beta.el7.centos.x86_64.rpm
 
 This installs the PAM modules and creates an initial configuration file
